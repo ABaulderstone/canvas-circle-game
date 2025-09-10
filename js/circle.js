@@ -1,27 +1,8 @@
 import { randomInt, euclideanDistance } from './utils.js';
 
 export class Circle {
-  static arr = [];
-
-  static filter() {
-    Circle.arr = Circle.arr.filter((c) => c.alive);
-  }
-
-  static spawn(canvas) {
-    let x;
-    let y;
-    let valid = false;
-    let attempts = 0;
-    while (!valid && attempts < 30) {
-      attempts++;
-      x = randomInt(40, canvas.width - 40);
-      y = randomInt(40, canvas.height - 40);
-      const newCircle = new Circle(x, y, 'blue');
-      valid = Circle.arr.every((c) => !Circle.doesOverlap(c, newCircle));
-      if (valid) {
-        Circle.arr.push(newCircle);
-      }
-    }
+  static filter(circles) {
+    return circles.filter((c) => c.alive);
   }
 
   static getCircles() {
@@ -68,7 +49,6 @@ export class Circle {
 
   onClick() {
     this.alive = false;
-    console.log('clicked');
     return this.points;
   }
 }
